@@ -1,0 +1,47 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# MLflow artifacts (will be mounted as volume)
+mlruns/
+
+# Data directories
+data/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Linting and formatting
+.mypy_cache/
+.ruff_cache/
+
+# Git
+.git/
+.gitignore
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation and misc
+README.md
+SEMINAR.md
+docker-compose.yml
+
+# Notebooks (will be mounted as volume)
+notebooks/

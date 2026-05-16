@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python src/get_data.py
+    deps:
+    - path: params.yaml
+      hash: md5
+      md5: 1b190248d3cd2662f9751bdfa0b21b5e
+      size: 109
+    - path: src/get_data.py
+      hash: md5
+      md5: eb267376fcc666c3de39b3d76763619b
+      size: 599
+    outs:
+    - path: data/raw/tips.csv
+      hash: md5
+      md5: b8e189917e1e12e5e34247f90db7834f
+      size: 7943

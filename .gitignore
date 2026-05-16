@@ -1,0 +1,84 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# MLflow
+mlruns/
+mlruns_docker/
+mlartifacts/
+
+# DVC
+.dvc/cache/
+.dvcstore/
+
+# Data and models (generated)
+data/
+models/
+metrics/
+
+# Prefect
+.prefect/
+prefect.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Linting and formatting
+.mypy_cache/
+.ruff_cache/
+.black/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Logs
+*.log
+logs/
+
+# State files
+batch_state.json
+
+# Lesson 4 - step4 homework (exclude all except README)
+lesson4/seminar/step4_monitoring/*
+!lesson4/seminar/step4_monitoring/README.md
+lesson5/**/catboost_info/

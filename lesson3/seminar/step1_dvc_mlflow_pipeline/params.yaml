@@ -1,0 +1,11 @@
+model:
+  seed: 42
+  test_size: 0.2
+
+data:
+  url: https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv
+  batch_size: 50  # размер каждой порции данных
+
+mlflow:
+  experiment_name: "incremental_training"
+  tracking_uri: "http://localhost:5000"

@@ -1,0 +1,9 @@
+# DVC используется только для версионирования данных
+stages:
+  # Только отслеживание данных, логика выполнения в Prefect
+  version_data:
+    cmd: echo "Data versioning with DVC"
+    deps:
+      - data/processed/
+    outs:
+      - data/processed/.dvc_tracked

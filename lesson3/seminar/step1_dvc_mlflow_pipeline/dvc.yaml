@@ -1,0 +1,57 @@
+stages:
+  get_data:
+    cmd: python src/get_data.py
+    params:
+      - data.url
+    outs:
+      - data/raw/tips_full.csv
+
+  prepare_batch:
+    cmd: python src/prepare_batch.py ${batch_number}
+    params:
+      - data.batch_size
+    deps:
+      - src/prepare_batch.py
+      - data/raw/tips_full.csv
+    outs:
+      - data/processed/batch_${batch_number}.csv
+
+  merge_data:
+    cmd: python src/merge_data.py ${batch_number}
+    deps:
+      - src/merge_data.py
+      - data/processed/batch_${batch_number}.csv
+    outs:
+      - data/processed/dataset_v${batch_number}.csv
+
+  preprocess:
+    cmd: python src/preprocess.py ${batch_number}
+    deps:
+      - src/preprocess.py
+      - data/processed/dataset_v${batch_number}.csv
+    outs:
+      - data/processed/dataset_processed_v${batch_number}.csv
+
+  train:
+    cmd: python src/train.py ${batch_number}
+    params:
+      - model
+      - mlflow
+    deps:
+      - src/train.py
+      - data/processed/dataset_processed_v${batch_number}.csv
+    outs:
+      - models/model_v${batch_number}.pkl
+    metrics:
+      - metrics/metrics_v${batch_number}.json
+
+  evaluate:
+    cmd: python src/evaluate.py ${batch_number}
+    params:
+      - model
+    deps:
+      - src/evaluate.py
+      - models/model_v${batch_number}.pkl
+      - data/processed/dataset_processed_v${batch_number}.csv
+    metrics:
+      - metrics/test_metrics_v${batch_number}.json

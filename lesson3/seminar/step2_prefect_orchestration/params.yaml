@@ -1,0 +1,14 @@
+model:
+  seed: 42
+  test_size: 0.2
+
+data:
+  url: https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv
+  batch_size: 50
+
+mlflow:
+  experiment_name: "prefect_pipeline"
+  tracking_uri: "http://localhost:5000"
+
+prefect:
+  work_queue: "default"

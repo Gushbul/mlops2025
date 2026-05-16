@@ -1,0 +1,18 @@
+model:
+  seed: 42
+  test_size: 0.2
+
+data:
+  url: https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv
+  batch_size: 30  # Меньший размер батча для демонстрации
+
+mlflow:
+  experiment_name: "automated_pipeline"
+  tracking_uri: "http://localhost:5000"
+
+prefect:
+  work_queue: "default"
+
+automation:
+  cron_schedule: "*/2 * * * *"  # Каждые 2 минуты
+  max_batches: 8  # Максимальное количество батчей для демо

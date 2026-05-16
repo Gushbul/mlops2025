@@ -1,0 +1,41 @@
+stages:
+  get_data:
+    cmd: python src/get_data.py
+    deps:
+      - src/get_data.py
+      - params.yaml
+    outs:
+      - data/raw/tips.csv
+
+  validate_data:
+    cmd: python src/validate_data.py
+    deps:
+      - src/validate_data.py
+      - data/raw/tips.csv
+    outs:
+      - reports/validation
+
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+      - src/preprocess.py
+      - data/raw/tips.csv
+    outs:
+      - data/processed/dataset.csv
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/processed/dataset.csv
+      - params.yaml
+    outs:
+      - models/model.pkl
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - models/model.pkl
+      - data/processed/dataset.csv
+      - params.yaml

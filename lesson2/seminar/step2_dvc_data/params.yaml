@@ -1,0 +1,4 @@
+seed: 42
+test_size: 0.2
+urls:
+  tips: https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv

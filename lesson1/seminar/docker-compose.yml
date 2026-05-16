@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # Main ML training service
+  ml-training:
+    build:
+      context: .
+      target: production
+    image: lesson1-mlops:0.1
+    container_name: lesson1-training
+    volumes:
+      - ./mlruns:/app/mlruns
+    environment:
+      - MLFLOW_TRACKING_URI=file:./mlruns
+    command: ["python", "-m", "src.app.train"]
+
+  # Development service with hot-reload
+  ml-dev:
+    build:
+      context: .
+      target: development
+    image: lesson1-mlops:dev
+    container_name: lesson1-dev
+    volumes:
+      - ./mlruns:/app/mlruns
+      - ./src:/app/src
+      - ./configs:/app/configs
+      - ./tests:/app/tests
+    environment:
+      - MLFLOW_TRACKING_URI=file:./mlruns
+    stdin_open: true
+    tty: true
+    command: ["bash"]
+
+  # MLflow UI service
+  mlflow-ui:
+    build:
+      context: .
+      target: development
+    image: lesson1-mlops:dev
+    container_name: lesson1-mlflow-ui
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/app/mlruns
+    environment:
+      - MLFLOW_TRACKING_URI=file:./mlruns
+    command: ["mlflow", "ui", "--backend-store-uri", "./mlruns", "--host", "0.0.0.0", "--port", "5000"]
+    depends_on:
+      - ml-training
+
+  # Jupyter service for experimentation
+  jupyter:
+    build:
+      context: .
+      target: development
+    image: lesson1-mlops:dev
+    container_name: lesson1-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./mlruns:/app/mlruns
+      - ./src:/app/src
+      - ./configs:/app/configs
+      - ./notebooks:/app/notebooks
+    environment:
+      - MLFLOW_TRACKING_URI=file:./mlruns
+    command: ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
+
+networks:
+  default:
+    name: lesson1-network
+    driver: bridge
+
+volumes:
+  mlruns:
+    driver: local
