@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "lesson4-step4-monitoring"
+version = "0.1.0"
+description = "Monitoring for FastAPI ONNX inference service"
+authors = ["MLOps Course"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+httpx = "^0.25.0"
+pyyaml = "^6.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.5.0"
+black = "^23.11.0"
+ruff = "^0.1.6"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
