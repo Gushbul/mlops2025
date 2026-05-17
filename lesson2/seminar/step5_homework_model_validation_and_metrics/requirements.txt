@@ -1,0 +1,5 @@
+pandas~=2.2
+scikit-learn~=1.5
+dvc~=3.50
+great-expectations~=0.18
+pyyaml~=6.0
