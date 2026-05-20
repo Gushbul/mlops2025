@@ -1,0 +1,15 @@
+services:
+  ollama_url: "http://localhost:11434"
+  ollama_model: "qwen2.5:1.5b"
+  pose_api_url: "http://localhost:8001"
+
+rag:
+  database_path: "poses_database.json"
+  top_k: 12
+
+animation:
+  output_dir: "animations"
+  default_output: "macarena.gif"
+  frame_duration_ms: 450
+  loop: 0
+  use_local_renderer_fallback: true
